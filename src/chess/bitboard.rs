@@ -6,19 +6,19 @@ pub struct Bitboard {
 }
 impl std::fmt::Display for Bitboard {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        let mut out = String::new();
+        let bin_str: String = format!("{:064b}", self.value).chars().rev().collect();
+        let out_str = format!("{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n",
+            &bin_str[56..64],
+            &bin_str[48..56],
+            &bin_str[40..48],
+            &bin_str[32..40],
+            &bin_str[24..32],
+            &bin_str[16..24],
+            &bin_str[8..16],
+            &bin_str[0..8],
+        );
 
-        for rank in (0..8).rev() {
-            for file in 0..8 {
-                let bit = rank * 8 + file;
-                let bit_val = self.value & (1 << bit) != 0;
-
-                out += if bit_val { "1 " } else { "0 "};
-            }
-            out += "\n"
-        }
-        out.pop();
-        write!(f, "{}", out)
+        write!(f, "{}", out_str)
     }
 }
 impl BitAnd for Bitboard {
