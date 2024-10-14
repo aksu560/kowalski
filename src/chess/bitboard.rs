@@ -4,6 +4,13 @@ use std::ops::{BitAnd, BitOr, BitXor, Not};
 pub struct Bitboard {
     pub value: u64
 }
+
+impl Bitboard {
+    pub fn new(value: u64) -> Bitboard {
+        Bitboard { value }
+    }
+}
+
 impl std::fmt::Display for Bitboard {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         let bin_str: String = format!("{:064b}", self.value).chars().rev().collect();
